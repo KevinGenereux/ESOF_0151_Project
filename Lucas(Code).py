@@ -144,7 +144,7 @@ corrmat=train_combined.corr()#create a correlation matrix
 top_corr_features=corrmat.index#assign the column names from the data to the matirx
 print(corrmat)# print out the matrix. This was very large and did not make a good graph 
 
-Once we have the correlation matrix we need to better understand what is going on and understand which variables are the most related to the answer 
+#Once we have the correlation matrix we need to better understand what is going on and understand which variables are the most related to the answer 
 # In[57]:
 
 
