@@ -1,5 +1,6 @@
-import numpy
+import numpy as np
 from sklearn.preprocessing import LabelEncoder
+
 
 def reduceMemUsage(df):
     start_mem = df.memory_usage().sum() / 1024 ** 2
@@ -80,3 +81,13 @@ def drop_high_missing_data_columns(mvd, data, threshold):
         del data[high_missing_data_cols[col_name]]  # Delete rows from dataFrame??? or columns
 
     return data
+
+
+def drop_high_correlation_features(data, threshold):
+    corr_matrix = data.corr()
+    upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(np.bool))
+    to_drop = [column for column in upper.columns if any(abs(upper[column]) > threshold)]
+    data = data.drop(columns=to_drop)
+
+    return data
+
