@@ -1,8 +1,6 @@
 import numpy
 from sklearn.preprocessing import LabelEncoder
 
-
-
 def reduceMemUsage(df):
     start_mem = df.memory_usage().sum() / 1024 ** 2
     print('Memory usage of dataframe is {:.2f} MB'.format(start_mem))
@@ -57,6 +55,28 @@ def replaceMissingValues(df):
 
     return df
 
+def encodeNumericalColumns(df):
+    enc=LabelEncoder()# create the label encoder
+    for col in df:#loop through all of the columns
+        if df[col].dtype.name=="object":#if the data is in a string format we will need to convert it to numeric to find the correlation
+            enc.fit(df[col].astype(str))#fit the column to the encoder to convert to numeric
+            df[col]=enc.fit_transform(df[col].astype(str))#transform the data into numeric
 
 
+def prepare_inputs_and_outputs(data):
+    # Prepare & save the inputs and outputs features
+    features = data.drop(['isFraud', 'TransactionID'], axis=1)
+    labels = data[['isFraud']]
 
+    return features, labels
+
+
+def drop_high_missing_data_columns(mvd, data, threshold):
+    # Where "mvd" = missing value data
+    # Get names of indexes for which column missing data is over 50%
+    high_missing_data_cols = mvd[mvd['Percentage'] > threshold].index
+
+    for col_name in range(len(high_missing_data_cols)):
+        del data[high_missing_data_cols[col_name]]  # Delete rows from dataFrame??? or columns
+
+    return data
