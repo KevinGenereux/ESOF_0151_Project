@@ -1,5 +1,4 @@
-from sklearn.metrics import confusion_matrix, auc, roc_curve
-import matplotlib.pyplot as plt
+from Imports import *
 def tp(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[3]
 def tn(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[0]
 def fp(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[1]

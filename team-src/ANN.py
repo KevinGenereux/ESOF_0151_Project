@@ -91,31 +91,4 @@ def PlotHistory(nnHist):
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Validation'], loc='upper left')
     plt.show()
-########################################### collection of different function calls to balance the data  
-#bal_x, bal_y =smote(3,X_train,Y_train)#get more balanced data using smote with the input and output as well as the K value 
 
-#ad_x,ad_y=ada(X_train,Y_train)#get more balanced data using ADASYN
-
-#u_x,u_y=ENN(12,X_train,Y_train)
-
-#CNN_x,CNN_y=CNN(1,X_train,Y_train)#relativly slow do not use again 
-
-#NM_x, NM_y=NM(3,X_train,Y_train)#try this one if they still take a long time 
-
-#ONN_x,ONN_y=OSS(4,200,X_train, Y_train)
-#print("Done ENN")
-#combination 
-
-#Use this to run in the main function 
-"""
-print("Combined")
-mod,nnHist=NNetwork(comb_x,comb_y,X_validation,Y_validation,5,500,500,25,400,0)#
-#print("With balanced training data")
-#NNacc(mod, comb_x,comb_y)
-#print("With origional training data")
-#NNacc(mod, X_train,Y_train)
-print("with origional testing data")
-NNacc(mod, X_test, Y_test) 
-PlotHistory(nnHist)
-plot_model(mod, to_file='model_plot.png', show_shapes=True, show_layer_names=True)#Plot the structure of the model and save it to a file called model_plot.png
-"""

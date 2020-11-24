@@ -1,40 +1,35 @@
-from imblearn.combine import SMOTETomek
-from imblearn.under_sampling import TomekLinks
-from imblearn.combine import SMOTETomek
-from imblearn.under_sampling import TomekLinks
-from imblearn.combine import SMOTEENN
-from imblearn.over_sampling import SMOTE
+from Imports import *
 
-def handleImbalancedDatset(method, x ,y):
+def handleImbalancedDataset(method, x ,y):
     X_resampled = []
     Y_resampled = []
     seed = 123
 
-    if method.lowercase == "smote":
+    if method.lower() == "smote":
         sm = SMOTE(sampling_strategy='auto', random_state=seed)
         X_resampled, Y_resampled = sm.fit_resample(x,y)
 
-    if method.lowercase == "adasyn":
+    if method.lower() == "adasyn":
         adas = ADASYN()
         X_resampled, Y_resampled = adas.fit_resample(x, y)
 
-    if method.lowercase == "enn":
+    if method.lower() == "enn":
         enn = EditedNearestNeighbours()
         X_resampled, Y_resampled = enn.fit_resample(x, y)
 
-    if method.lowercase == "cnn":
+    if method.lower() == "cnn":
         cnn = CondensedNearestNeighbour()
         X_resampled, Y_resampled = cnn.fit_resample(x, y)
 
-    if method.lowercase == "oss":
+    if method.lower() == "oss":
         oss = OneSidedSelection()
         X_resampled, Y_resampled = oss.fit_resample(x, y)
 
-    if method.lowercase == "nm":
-        nm = NearMiss(version=3,n_neighbors_ver3=n)
+    if method.lower() == "nm":
+        nm = NearMiss(version=3,n_neighbors_ver3=3)
         X_resampled, Y_resampled = nm.fit_resample(x, y)
 
-    if method.lowercase == "smotetomek":
+    if method.lower() == "smotetomek":
         smotetomek = SMOTETomek(tomek=TomekLinks(sampling_strategy='majority'))
         X_resampled, Y_resampled = smotetomek.fit_resample(x, y)
 

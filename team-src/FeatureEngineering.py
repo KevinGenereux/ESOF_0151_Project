@@ -1,4 +1,4 @@
-import numpy as np
+from Imports import *
 
 def simplifyColumnValues(df):
     df.loc[df['device_name'].str.contains('SM', na=False), 'device_name'] = 'Samsung'

@@ -1,4 +1,4 @@
-import pandas as pd
+from Imports import *
 
 
 def readMergedDataset():
@@ -14,6 +14,17 @@ def readMergedDataset():
 
     return merged_df
 
+def readMergedDatasetLocal(): 
+    transaction = pd.read_csv("D:\School\Fifth Year\Large Scale Data Analytics\Project\ieee-fraud-detection\\train_transaction.csv")
+    identity = pd.read_csv("D:\School\Fifth Year\Large Scale Data Analytics\Project\ieee-fraud-detection\\train_identity.csv")
+
+    # Merging transactional and test data
+    merged_df = transaction.merge(identity, how='left',on="TransactionID", left_index=True, right_index=True)
+
+    # Freeing up memory
+    del transaction, identity
+
+    return merged_df
 
 # used for testing purposes
 def readTrainTransaction():

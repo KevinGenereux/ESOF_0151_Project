@@ -1,5 +1,4 @@
-import numpy as np
-from sklearn.preprocessing import LabelEncoder
+from Imports import *
 
 
 def reduceMemUsage(df):
@@ -33,6 +32,24 @@ def reduceMemUsage(df):
 
     return df
 
+def get_missing_data_percentage(data):
+    
+    # where mvp = missing value percentages
+    mvp = data.isnull().sum() * 100 / len(data)
+    mvp = pd.DataFrame({'Feature': data.columns,'Percentage': mvp})
+    
+    return mvp.sort_values(by ='Percentage', ascending=False)
+
+def drop_one_value_columns(data):
+    
+    # Drop columns with only 1 unique value.
+    for column in data.columns:
+        if len(data[column].unique()) == 1:
+            #print(traindata[column].name)
+            data.drop(column,inplace=True,axis=1)
+            
+    return data
+
 def getCategoricalFeatures(data):
     columns = list(data)
     result = []
@@ -41,6 +58,13 @@ def getCategoricalFeatures(data):
             result.append(c)
     return data[result]
 
+def getNumericalFeatures(data):
+    columns = list(data)
+    result = []
+    for c in columns: 
+        if data.dtypes[c] != np.object:
+            result.append(c) 
+    return data[result]
 
 def replaceMissingValues(df):
     for col in df.columns:
@@ -62,7 +86,7 @@ def encodeNumericalColumns(df):
         if df[col].dtype.name=="object":#if the data is in a string format we will need to convert it to numeric to find the correlation
             enc.fit(df[col].astype(str))#fit the column to the encoder to convert to numeric
             df[col]=enc.fit_transform(df[col].astype(str))#transform the data into numeric
-
+    return df
 
 def prepare_inputs_and_outputs(data):
     # Prepare & save the inputs and outputs features
@@ -91,3 +115,35 @@ def drop_high_correlation_features(data, threshold):
 
     return data
 
+def split_data(features, labels):
+    
+    # Data Splitting: 60% for training, 20% for validation and 20% for testing.
+    X_train, X_test, Y_train, y_test = train_test_split(features, labels, test_size=0.4)
+    X_validation, X_test, Y_validation, y_test = train_test_split(X_test, y_test, test_size=0.5)
+    
+    return X_train, Y_train, X_test, y_test, X_validation, Y_validation
+
+#Select the 50 best features 
+def selectkbestfeatures(X_train, Y_train, X_validation, X_test, numberOfFeatures):
+
+    fit = SelectKBest(score_func=f_classif, k=numberOfFeatures).fit(X_train, Y_train)
+
+    X_train = fit.transform(X_train)
+    X_validation = fit.transform(X_validation)
+    X_test = fit.transform(X_test)
+
+    # Get column names from the best features
+    X_train_cols = fit.get_support(indices=True)
+    X_validation_cols = fit.get_support(indices=True)
+    X_test_cols = fit.get_support(indices=True)
+
+    X_train = pd.DataFrame(X_train, columns=X_train_cols)
+    X_validation = pd.DataFrame(X_validation, columns=X_validation_cols)
+    X_test = pd.DataFrame(X_test, columns=X_test_cols)
+
+    # Create new dataframes with the column names
+    #X_train = X_train.iloc[:,X_train_cols]
+    #X_validation = X_validation.iloc[:,X_validation_cols]
+    #X_test = X_test.iloc[:,X_test_cols]
+
+    return X_train, X_validation, X_test

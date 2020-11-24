@@ -1,3 +1,5 @@
+#Import the other files 
+
 import pandas as pd
 import numpy as np
 import collections
@@ -10,6 +12,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn import preprocessing
 from sklearn import metrics
+from sklearn.decomposition import PCA
 
 # Models
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
