@@ -1,5 +1,4 @@
-from Imports import *
-from sklearn.metrics import confusion_matrix, auc, roc_curve, precision_score
+from sklearn.metrics import confusion_matrix, auc, roc_curve
 import matplotlib.pyplot as plt
 def tp(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[3]
 def tn(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[0]
@@ -31,6 +30,10 @@ def f1(y_true, y_pred):
 def accuracy(y_true, y_pred):
     return float(tp(y_true, y_pred) + tn(y_true, y_pred)) / float((tp(y_true, y_pred) + tn(y_true, y_pred) + fp(y_true, y_pred)
                                                          + fn(y_true, y_pred)))
+# TP / (TP + FP)
+def precision(y_true, y_pred):
+    return tp(y_true, y_pred) / (tp(y_true, y_pred) + fp(y_true, y_pred))
+
 # generate an ROC curve graph
 def roc(y_true, y_pred, title, filename):
     fpr, tpr, _ = roc_curve(y_true, y_pred)

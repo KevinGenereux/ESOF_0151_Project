@@ -1,25 +1,18 @@
 import pandas as pd
 
 
-def readFiles():
+def readMergedDataset():
     # Reading in each data file
-    train_transaction = pd.read_csv(
-        '/content/drive/My Drive/Group #2: Detecting Fraudulent Transactions/Project Code/dataset/train_transaction.csv')
-    train_identity = pd.read_csv(
-        '/content/drive/My Drive/Group #2: Detecting Fraudulent Transactions/Project Code/dataset/train_identity.csv')
-    test_identity = pd.read_csv(
-        '/content/drive/My Drive/Group #2: Detecting Fraudulent Transactions/Project Code/dataset/test_identity.csv')
-    test_transaction = pd.read_csv(
-        '/content/drive/My Drive/Group #2: Detecting Fraudulent Transactions/Project Code/dataset/test_transaction.csv')
+    transaction = pd.read_csv('/content/drive/My Drive/Group #2: Detecting Fraudulent Transactions/Project Code/dataset/train_transaction.csv')
+    identity = pd.read_csv('/content/drive/My Drive/Group #2: Detecting Fraudulent Transactions/Project Code/dataset/train_identity.csv')
 
     # Merging transactional and test data
-    train = train_transaction.merge(train_identity, how='left', left_index=True, right_index=True)
-    test = test_transaction.merge(test_identity, how='left', left_index=True, right_index=True)
+    merged_df = transaction.merge(identity, how='left', left_index=True, right_index=True)
 
     # Freeing up memory
-    del train_identity, train_transaction, test_identity, test_transaction
+    del transaction, identity
 
-    return train, test
+    return merged_df
 
 
 # used for testing purposes
