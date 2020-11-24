@@ -15,13 +15,14 @@ def XGModel(predictors,response,test_pred,test_resp):
         
         xg_reg = xgb.XGBClassifier(  # a classifyer XGBoost model with specific values to be used later 
                 n_estimators=2000,
-                max_depth=12, 
-                objective='reg:logistic',
-                learning_rate=0.1, 
-                subsample=0.8,
+                max_depth=6, 
+                objective='binary:logistic',
+                learning_rate=0.3, 
+                subsample=0.7,
                 colsample_bytree=0.15, 
                 missing=-1, 
                 eval_metric='auc',
+                scale_pos_weight=2,
                 # USE CPU
                 nthread=4,
                 tree_method='hist' 
