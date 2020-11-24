@@ -18,9 +18,8 @@ def XGModel(predictors,response,test_pred,test_resp):
                 max_depth=6, 
                 objective='binary:logistic',
                 learning_rate=0.3, 
-                subsample=0.7,
-                colsample_bytree=0.15, 
-                missing=-1, 
+                subsample=0.5,
+                colsample_bytree=0.5, 
                 eval_metric='auc',
                 scale_pos_weight=2,
                 # USE CPU
