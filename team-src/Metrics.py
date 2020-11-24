@@ -1,26 +1,3 @@
-metrics.py
-K
-I
-L
-T
-Type
-Text
-Size
-2 KB (2,057 bytes)
-Storage used
-2 KB (2,057 bytes)
-Location
-Project Code
-Owner
-me
-Modified
-Nov 13, 2020 by me
-Opened
-Nov 13, 2020 by me
-Created
-Oct 30, 2020 with Google Drive File Stream
-Add a description
-Viewers can download
 from sklearn.metrics import confusion_matrix, auc, roc_curve
 import matplotlib.pyplot as plt
 
@@ -54,6 +31,10 @@ def f1(y_true, y_pred):
 def accuracy(y_true, y_pred):
     return float(tp(y_true, y_pred) + tn(y_true, y_pred)) / float((tp(y_true, y_pred) + tn(y_true, y_pred) + fp(y_true, y_pred)
                                                          + fn(y_true, y_pred)))
+# TP / (TP + FP)
+def precision(y_true, y_pred):
+    return tp(y_true, y_pred) / (tp(y_true, y_pred) + fp(y_true, y_pred))
+
 # generate an ROC curve graph
 def roc(y_true, y_pred, title, filename):
     fpr, tpr, _ = roc_curve(y_true, y_pred)
