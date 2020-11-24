@@ -1,17 +1,4 @@
-"""
-from numpy import loadtxt
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras import backend as K
-import tensorflow as tf
-import numpy as np
-import matplotlib.pyplot as plt
-from keras.optimizers import SGD, RMSprop
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, roc_curve, auc, roc_auc_score
-"""
-from ../ import Imports
-
+from Imports import * 
 #------------------------------------------------Neural Network Functions-------------------------------------#
 #These are different functions to build and test out an Artifical Neural Network 
 #There are functions to train the model, print training data, find accuaracy and other metrics and plot the layout of the NN

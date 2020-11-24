@@ -1,29 +1,6 @@
-metrics.py
-K
-I
-L
-T
-Type
-Text
-Size
-2 KB (2,057 bytes)
-Storage used
-2 KB (2,057 bytes)
-Location
-Project Code
-Owner
-me
-Modified
-Nov 13, 2020 by me
-Opened
-Nov 13, 2020 by me
-Created
-Oct 30, 2020 with Google Drive File Stream
-Add a description
-Viewers can download
-from sklearn.metrics import confusion_matrix, auc, roc_curve
+from Imports import *
+from sklearn.metrics import confusion_matrix, auc, roc_curve, precision_score
 import matplotlib.pyplot as plt
-
 def tp(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[3]
 def tn(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[0]
 def fp(y_true, y_pred): return confusion_matrix(y_true, y_pred).ravel()[1]
